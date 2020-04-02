@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Be smart | Будь умным с нами</title>
+</head>
+<body>
+
+<div th:switch="${teacherProfiles}">
+    <h2 th:case="null">No users found!</h2>
+    <div th:case="*">
+        <h2>Users</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>FIO</th>
+                <th>Discipline</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="profile : ${teacherProfiles}">
+                <td th:text="${profile.id}"></td>
+                <td th:text="${profile.teacher.FIO}"></td>
+                <td th:text="${profile.discipline.Name}"></td>
+                <!--<td th:text="FIO"></td>-->
+                <!--<td th:text="Disc"></td>-->
+                <td th:text="${profile.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/user-create">Create user</a></p>
+</div>
+
+</body>
+</html>
