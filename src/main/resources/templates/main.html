@@ -1,38 +1,115 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Be smart | Будь умным с нами</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/main.css" th:href="@{/css/main.css}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
+
 <body>
 
-<div th:switch="${teacherProfiles}">
-    <h2 th:case="null">No users found!</h2>
-    <div th:case="*">
-        <h2>Users</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>FIO</th>
-                <th>Discipline</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="profile : ${teacherProfiles}">
-                <td th:text="${profile.id}"></td>
-                <td th:text="${profile.teacher.FIO}"></td>
-                <td th:text="${profile.discipline.Name}"></td>
-                <!--<td th:text="FIO"></td>-->
-                <!--<td th:text="Disc"></td>-->
-                <td th:text="${profile.price}"></td>
-            </tr>
-            </tbody>
-        </table>
+<div class="wrap">
+
+    <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+        <a class="navbar-brand" href="/">BE SMART</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">О нас</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Контакты</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="container" id="catalog_teachers">
+        <form name = "filterTeacher" id = "formFilter" th:action="@{/}" th:object = "${filterTeachForm}" method="post">
+            <div class="row">
+                <div class="col-md">
+                    <select th:field = "*{idDiscipline}">
+                        <option th:each="discipline : ${disciplines}"
+                            th:value = "${discipline.Id}"
+                                th:utext = "${discipline.Name}"/>
+                    </select>
+                </div>
+                <div class="col-md">
+                    <select th:field="*{price}">
+                     <option value = "300-3000">Не важно</option>
+                        <option value = "300-600">От 300 до 600 руб</option>
+                        <option value = "600-1000">От 600 до 1000 руб</option>
+                        <option value = "1000-1500">От 1000 до 1500 руб</option>
+                        <option value = "1500-3000">От 1500 до 3000 руб</option>
+                    </select>
+                </div>
+                <div class="col-md">
+                    <button class = "btn btn-primary btnSearchTeach" id = "filterSubmit">Найти</button>
+                    <a href="/" class="btn btn-primary btnSearchTeach">Очистить фильтр</a>
+                </div>
+            </div>
+        </form>
+
+
+
+
+        <div th:each="profile : ${teacherProfiles}" class = "row">
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <span th:text="${profile.teacher.FIO}"></span>
+                            <small class="text-muted nameDiscipline" th:text="${profile.discipline.Name}"></small>
+                        </h4>
+                        <!--<a data-fancybox="gallery" href= <?="/img/". $profile->teacher['Avatar']?> >-->
+                            <!--<img class = "img-left" src= <?="/img/". $profile->teacher['Avatar_mini']?>>-->
+                        <!--</a>-->
+                        <p class="card-text" th:text="${profile.teacher.education}"></p>
+                        <p class="card-text" th:text="${profile.teacher.experience}"></p>
+                        <!--<?= Html::a('Подробнее...', ['/site/teacher', 'id' => $profile['id_profile']], ['class' => 'btn btn-primary']); ?>-->
+                        <p class="textPrice text-right" th:text="${profile.price}"> руб/ч</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <p><a href="/user-create">Create user</a></p>
+
 </div>
+
+<footer class="page-footer font-small bg-dark align-bottom">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3 text-white">© 2020 Copyright
+        <a href="http://localhost:8080/">  besmart.local</a>
+        <p class="contacts text-white">Телефон: 8-800-890-23-34</p>
+        <a href="/admin/main">Панель администратора</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
 </html>
