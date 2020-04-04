@@ -25,11 +25,11 @@ public class TeacherProfile {
     private Integer price;
 
 
-    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_teacher")
     private Teacher teacher;
 
-    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_discipline")
     private Discipline discipline;
 }

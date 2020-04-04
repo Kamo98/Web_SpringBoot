@@ -46,4 +46,8 @@ public class Teacher {
 
     @OneToMany(mappedBy = "teacher")
     private Collection<TeacherProfile> teacherProfiles;
+
+    public Integer getId() {
+        return Id;
+    }
 }

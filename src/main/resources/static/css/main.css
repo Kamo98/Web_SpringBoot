@@ -6,7 +6,24 @@
     border:1px solid #dee2e6;
     border-radius:.25rem;
     max-width:100%;
-    height:auto
+    height:20rem;
+}
+
+
+.img-left-mini {
+    margin: 0 20px 10px 0;
+    float: left;
+    padding:.25rem;
+    background-color:#fff;
+    border:1px solid #dee2e6;
+    border-radius:.25rem;
+    max-width:100%;
+    height:15rem;
+}
+
+
+.formItem{
+    margin-bottom: 2rem;
 }
 
 

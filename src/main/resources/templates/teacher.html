@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Be smart | Будь умным с нами</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/main.css" th:href="@{/css/main.css}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="wrap">
+    
+    <div th:insert="~{fragments/navbar::fragment_navbar}"></div>
+
+    <div th:switch="${teacher}">
+        <div th:case="null">
+            <div class="alert alert-warning" role="alert">
+                Преподаватель не найден
+            </div>
+        </div>
+        <div class="container" id="infoTeacher" th:case="*">
+            <div class="row">
+                <div class="col-md">
+                    <h4 th:text="${teacher.FIO}"></h4>
+                </div>
+                <div class="col-md">
+                    <div class="row border rounded-top" th:each="profile : ${teacher.teacherProfiles}">
+                        <div class = "col-md">
+                            <h5 class="text-muted nameDiscipline" th:text="${profile.discipline.Name}"></h5>
+                        </div>
+                        <div class = "col-md">
+                            <h5 class="text-muted nameDiscipline" th:text="${profile.price}"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img class = "img-left" th:src = "@{/img/{name}(name=${teacher.Avatar})}">
+                </div>
+                <div class="col-md-8">
+                    <p th:text="${teacher.education}"></p>
+                    <p th:text="${teacher.experience}"></p>
+                    <p th:text="${teacher.about_me}"></p>
+                    <p th:text="${teacher.phone}"></p>
+                    <p th:text="${teacher.email}"></p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{fragments/footer::fragment_footer}"></div>
+
+</body>
+</html>

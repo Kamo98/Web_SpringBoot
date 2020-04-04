@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Be smart | Будь умным с нами</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/main.css" th:href="@{/css/main.css}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="wrap">
+    
+    <div th:insert="~{fragments/navbar::fragment_navbar}"></div>
+
+    <form th:action="@{/update}" th:object = "${teacher}" method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <label for="FIO">ФИО преподавателя</label>
+                    <input type="text" th:field="*{FIO}" id = "FIO" width="auto" class="form-control">
+                </div>
+                <div class="col-md">
+                    <!--<div class="row" th:each="profile : ${teacher.teacherProfiles}">-->
+                        <!--<div class="col-md">-->
+                            <!--<div class = "form-group">-->
+                                <!--<label for="teachersDisc">Дисциплина</label>-->
+                                <!--<select th:field = "${profile.discipline.id}" id = "teachersDisc" class = "form-control">-->
+                                    <!--<option th:each="discipline : ${disciplines}"-->
+                                            <!--th:value = "${discipline.id}"-->
+                                            <!--th:utext = "${discipline.Name}"/>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md">-->
+                            <!--<label for="price">Цена за час</label>-->
+                            <!--<input type="number" th:field="${profile.price}" id = "price">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img class = "img-left" src="/img/standart_big.jpg">
+                                <label>
+                                    Изменить аватар
+                                    <input type="file" id ="avatar" class="form-control">
+                                </label>
+                </div>
+                <div class="col-md-8">
+                    <div class="row formItem">
+                        <div class="col-md-3">
+                            <label for="education">Образование:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea th:field="*{education}" rows="5" id = "education" cols="100" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row formItem">
+                        <div class="col-md-3">
+                            <label for="aboutMe">Обо мне:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea th:field="*{about_me}" rows="5" id = "aboutMe"  cols="100" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row formItem">
+                        <div class="col-md-3">
+                            <label for="experience">Опыт работы:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea th:field="*{experience}" rows="5" id = "experience"  cols="100" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row formItem">
+                        <div class="col-md-3">
+                            <label for="phone">Номер телефона:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" th:field="*{phone}" id = "phone" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row formItem">
+                        <div class="col-md-3">
+                            <label for="email">Номер телефона:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" th:field="*{email}" id = "email" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Сохранить" class="btn btn-primary">
+            </div>
+            <p></p>
+        </div>
+    </form>
+
+</div>
+
+<div th:insert="~{fragments/footer::fragment_footer}"></div>
+
+</body>
+</html>

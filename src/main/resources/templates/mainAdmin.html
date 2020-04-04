@@ -77,6 +77,17 @@
                                 <p class="card-text" th:text="${profile.teacher.experience}"></p>
                                 <a th:href="@{teacher/{id}(id=${profile.teacher.id})}" class = "btn btn-primary">Подробнее...</a>
                                 <p class="textPrice text-right" th:text="${profile.price}"> руб/ч</p>
+
+                                <div class = "adminPanel">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <a th:href="@{delete/{id}(id = ${profile.Id})}" class = "btn btn-outline-warning btn_del">Удалить</a>
+                                        </div>
+                                        <div class="col-md">
+                                            <a th:href="@{update/{id}(id = ${profile.teacher.Id})}" class = "btn btn-outline-primary">Изменить</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,5 +107,3 @@
 
 </body>
 </html>
-
-
